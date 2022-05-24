@@ -15,8 +15,13 @@ const BulkManager = require("actions-bulk-manager");
 const operationsLimit = 10;
 
 const bulk = new BulkManager(operationsLimit);
-const operations = [await Promise.resolve(1 + 5)];
-operations.forEach((operation) => {
+
+const p1 = new Promise.resolve(1 + 5);
+const p2 = new Promise.resolve(3 + 5);
+
+const operations = [p1, p2];
+
+operations.map((operation) => {
   bulk.add(operation);
 });
 // You need to call `done()` after the array execution
