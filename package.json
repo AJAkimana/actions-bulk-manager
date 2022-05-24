@@ -1,0 +1,19 @@
+{
+  "name": "actions-bulk-manager",
+  "version": "0.0.1",
+  "description": "Actions bulk manager",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "AJAkimana",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AJAkimana/actions-bulk-manager.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AJAkimana/actions-bulk-manager.git/issues"
+  },
+  "keywords": ["promise", "bulk", "manager"]
+}
