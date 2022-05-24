@@ -7,29 +7,32 @@ function ActionsBulkManager(operationsLimit = 5) {
   if (typeof operationsLimit !== "number")
     throw new Error("operationsLimit must be number");
 
-  const operations = [];
-  const limit = operationsLimit;
+  this.operations = [];
+  this.limit = operationsLimit;
 
   this.execute = async () => {
+    if (this.operations.length === 0) {
+      throw new Error("Sorry you have to add some operations first");
+    }
+    const theOps = this.operations;
+    this.operations = [];
     await Promise.all(
-      operations.map(async (operation) => {
-        await operation;
+      theOps.map(async (operation) => {
+        return await operation;
       })
     );
-
-    operations.length = 0;
   };
 
   this.add = async (operation) => {
-    operations.push(operation);
-    if (operations.length >= limit) {
-      await this.execute();
+    this.operations.push(operation);
+    if (this.operations.length >= this.limit) {
+      this.execute();
     }
   };
 
   // Always call this upon completion to make sure the final partial chunk is saved.
   this.done = async () => {
-    if (operations.length) {
+    if (this.operations.length > 0) {
       await this.execute();
     }
   };
